@@ -18,7 +18,7 @@ def submit(**kwargs):
     handle_submit(**kwargs)
 
 def handle_submit(judge, problem, solution_src, open_editor, copy):
-    with open(os.path.join(os.getcwd(), "iccrc.toml"), "rb") as f:
+    with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
         cfg = tomllib.load(f)
     
     solution_dir = os.path.join(os.getcwd(), "problems", judge, problem)

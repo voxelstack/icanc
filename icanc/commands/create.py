@@ -20,7 +20,7 @@ def solution(**kwargs):
     create_solution(**kwargs)
 
 def create_solution(judge, problem, template, solution_dst, open_editor):
-    with open(os.path.join(os.getcwd(), "iccrc.toml"), "rb") as f:
+    with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
         cfg = tomllib.load(f)
     
     dir = os.path.join(os.getcwd(), "problems", judge, problem)
@@ -43,7 +43,7 @@ def testcases(**kwargs):
     create_testcases(**kwargs)
 
 def create_testcases(judge, problem, testcases_dst, open_editor):
-    with open(os.path.join(os.getcwd(), "iccrc.toml"), "rb") as f:
+    with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
         cfg = tomllib.load(f)
     
     dir = os.path.join(os.getcwd(), "problems", judge, problem)

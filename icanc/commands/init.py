@@ -6,7 +6,7 @@ import subprocess
 @click.command()
 @click.option("--name", prompt=True, default="leet")
 def init(name):
-    """Initialize an empty icc project."""
+    """Initialize an empty icanc project."""
 
     dir = os.path.join(os.getcwd(), name)
     if os.path.exists(dir):
@@ -17,7 +17,7 @@ def init(name):
     res_dir = os.path.join(os.path.dirname(__file__), "..", "data")
 
     os.makedirs(os.path.join(dir, "problems"))
-    shutil.copy2(os.path.join(res_dir, "iccrc.toml"), dir)
+    shutil.copy2(os.path.join(res_dir, "icancrc.toml"), dir)
     shutil.copy2(os.path.join(res_dir, "LICENSE"), dir)
     shutil.copytree(os.path.join(res_dir, "include"), os.path.join(dir, "include"))
     shutil.copytree(os.path.join(res_dir, "templates"), os.path.join(dir, "templates"))

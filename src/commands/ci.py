@@ -7,8 +7,9 @@ from .tools.runner import run
 from .tools.writer import present_ci_cases
 
 @click.command()
-@click.option("--judge", type=str)
+@click.option("--judge", type=str, help="Only test one judge. Helpful for README badges.")
 def ci(**kwargs):
+    """Test everything with machine friendly output and exit codes."""
     handle_ci(**kwargs)
 
 def handle_ci(judge):
@@ -42,7 +43,7 @@ def handle_ci(judge):
                 binary_path = os.path.join(binary_dir, Path(solution).stem)
                 os.makedirs(binary_dir, exist_ok=True)
 
-                handle_submit(judge, problem, solution, False, False)
+                handle_submit(judge, problem, Path(solution).stem, False, False)
                 result = build(solution_path, submission_path, binary_path)
                 if result != 0:
                     return -1

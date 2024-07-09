@@ -6,14 +6,16 @@ import tomllib
 
 @click.group()
 def create():
+    """Create solutions or testcases."""
+
     pass
 
 @create.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
 @click.option("--template", type=click.Path(exists=True), required=True)
-@click.option("--solution", "solution_dst", default="solution")
-@click.option("--open", "open_editor", is_flag=True)
+@click.option("--solution", "solution_dst", default="solution", help="Name for the solution file.")
+@click.option("--open", "open_editor", is_flag=True, help="Open solution file on text editor.")
 def solution(**kwargs):
     create_solution(**kwargs)
 
@@ -35,8 +37,8 @@ def create_solution(judge, problem, template, solution_dst, open_editor):
 @create.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--open", "open_editor", is_flag=True)
-@click.option("--testcases", "testcases_dst", default="testcases")
+@click.option("--open", "open_editor", is_flag=True, help="Open testcases file on text editor.")
+@click.option("--testcases", "testcases_dst", default="testcases", help="Name for the testcases file.")
 def testcases(**kwargs):
     create_testcases(**kwargs)
 
@@ -69,10 +71,12 @@ def create_testcases(judge, problem, testcases_dst, open_editor):
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
 @click.option("--template", type=click.Path(exists=True), required=True)
-@click.option("--solution", "solution_dst", default="solution")
-@click.option("--testcases", "testcases_dst", default="testcases")
-@click.option("--open", "open_editor", is_flag=True)
+@click.option("--solution", "solution_dst", default="solution", help="Name for the solution file.")
+@click.option("--testcases", "testcases_dst", default="testcases", help="Name for the testcases file.")
+@click.option("--open", "open_editor", is_flag=True, help="Open solution file on text editor.")
 def scaffold(judge, problem, template, solution_dst, testcases_dst, open_editor):
+    """Create a solution and testcase files."""
+
     click.echo("Scaffolding {}/{}\n".format(judge, problem))
 
     create_solution(judge, problem, template, solution_dst, open_editor)

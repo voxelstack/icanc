@@ -6,6 +6,8 @@ import subprocess
 @click.command()
 @click.option("--name", prompt=True, default="leet")
 def init(name):
+    """Initialize an empty icc project."""
+
     dir = os.path.join(os.getcwd(), name)
     if os.path.exists(dir):
         click.echo("Directory ./{} already exists.".format(name), err=True)

@@ -63,7 +63,67 @@ def handle_test(judge, problem, solution_src, testcases_src, watch):
                 return
 
             testcase_path = os.path.join(testcases_dir, testcase)
-            run(binary_path, testcase_path)
+            runs = run(binary_path, testcase_path)
+
+            if len(runs) == 0:
+                click.secho(" NO TESTS ", bg="yellow", fg="black")
+                return -1
+            
+            fails = []
+            for case in runs:
+                name = case["name"]
+                error = case["error"]
+
+                if error == None:
+                    click.secho("✓ ", fg="green", nl=False)
+                    click.secho(name, bold=True)
+                    continue
+
+                if error == "invalid_case":
+                    click.secho("⚠ ", fg="red", nl=False)
+                    click.secho(name, bold=True, nl=False)
+                    click.echo(" (invalid testcase)")
+                elif error == "runtime":
+                    click.secho("⚠ ", fg="red", nl=False)
+                    click.secho(name, bold=True, nl=False)
+                    click.echo(" (runtime error)")
+                elif error == "presentation":
+                    click.secho("× ", fg="yellow", nl=False)
+                    click.secho(name, bold=True)
+                elif error == "wrong_answer":
+                    click.secho("× ", fg="red", nl=False)
+                    click.secho(name, bold=True)
+                
+                fails.append(case)
+            
+            if len(fails) == 0:
+                click.secho(" PASS ", bg="green", fg="black")
+            else:
+                click.secho(" FAIL ", bg="red", fg="black")
+                for fail in fails:
+                    name = fail["name"]
+                    error = fail["error"]
+
+                    click.echo()
+                    if error == "presentation":
+                        click.secho("● ", fg="yellow", nl=False)
+                        click.secho(f"{name}: presentation error")
+                    elif error == "wrong_answer":
+                        diff = fail["diff"]
+
+                        click.secho("● ", fg="red", nl=False)
+                        click.secho(f"{name}: wrong answer")
+                        for line in diff:
+                            color = "red" if line.startswith("-") else "green" if line.startswith("+") else None
+                            click.secho(f"{line}", fg=color)
+                    elif error == "runtime":
+                        stderr = fail["stderr"]
+
+                        click.secho("● ", fg="red", nl=False)
+                        click.secho(f"{name}: runtime error")
+                        click.echo(stderr)
+                    elif error == "invalid_case":
+                        click.secho(f"{name}: invalid test case", fg="red")
 
         if watch:
             click.echo("\nWatching for changes. ^C to stop.")

@@ -12,7 +12,10 @@ from .tools.preprocessor import preprocess
 @click.option("--solution", "solution_src", default="solution")
 @click.option("--open", "open_editor", is_flag=True)
 @click.option("--copy", is_flag=True)
-def submit(judge, problem, solution_src, open_editor, copy):
+def submit(**kwargs):
+    handle_submit(**kwargs)
+
+def handle_submit(judge, problem, solution_src, open_editor, copy):
     with open(os.path.join(os.getcwd(), "iccrc.toml"), "rb") as f:
         cfg = tomllib.load(f)
     

@@ -11,7 +11,7 @@ from watchdog.observers import Observer
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
 @click.option("--solution", "solution_src", default="solution")
-@click.option("--testcases", "testcases_src", default="testcases")
+@click.option("--testcases", "testcases_src", multiple=True)
 @click.option("--watch", is_flag=True)
 def test(**kwargs):
     handle_test(**kwargs)
@@ -27,8 +27,7 @@ def handle_test(judge, problem, solution_src, testcases_src, watch):
     binary_path = os.path.join(binary_dir, solution_src)
     os.makedirs(binary_dir, exist_ok=True)
 
-    testcases_dir = os.path.join(os.getcwd(), "problems", judge, problem)
-    testcases_path = os.path.join(testcases_dir, "{}.toml".format(testcases_src))
+    testcases_dir = os.path.join(os.getcwd(), "problems", judge, problem) 
 
     # click.clear() leaves uncleared lines if files change too fast.
     def clear():
@@ -44,16 +43,27 @@ def handle_test(judge, problem, solution_src, testcases_src, watch):
         else:
             click.secho(" RUN ", bg="cyan", fg="white", nl=False)
         click.echo(f" ./problems/{judge}/{problem}/", nl=False)
-        click.secho(f"{solution_src}.c", bold=True, nl=False)
-        click.echo(f" < ./problems/{judge}/{problem}/{testcases_src}.toml\n")
+        click.secho(f"{solution_src}.c", bold=True)
 
-        handle_submit(judge, problem, solution_src, False, False)
-        
-        result = build(solution_path, submission_path, binary_path)
-        if result != 0:
-            return
+        # TODO Only rebuild the list of testcases when a file is created or deleted.
+        testcases = []
+        if testcases_src:
+            testcases.extend([f"{t}.toml" for t in testcases_src])
+        else:
+            files = os.listdir(testcases_dir)
+            testcases.extend([f for f in files if f.endswith(".toml")])
 
-        run(binary_path, testcases_path)
+        for testcase in testcases:
+            click.echo(f"\n< ./problems/{judge}/{problem}/{testcase}")
+
+            handle_submit(judge, problem, solution_src, False, False)
+            
+            result = build(solution_path, submission_path, binary_path)
+            if result != 0:
+                return
+
+            testcase_path = os.path.join(testcases_dir, testcase)
+            run(binary_path, testcase_path)
 
         if watch:
             click.echo("\nWatching for changes. ^C to stop.")
@@ -76,7 +86,7 @@ def handle_test(judge, problem, solution_src, testcases_src, watch):
         try:
             test()
             while True:
-                time.sleep(5)
+                time.sleep(1)
         except KeyboardInterrupt:
             observer.stop()
     else:

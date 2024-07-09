@@ -75,10 +75,10 @@ def run(binary, testcases):
                 click.secho(name, bold=True)
 
         if len(fails) == 0:
-            click.secho("\n PASS ", bg="green", fg="black")
+            click.secho(" PASS ", bg="green", fg="black")
             return 0
         
-        click.secho("\n FAIL ", bg="red", fg="black")
+        click.secho(" FAIL ", bg="red", fg="black")
         for fail in fails:
             name = fail["name"]
             error = fail["error"]

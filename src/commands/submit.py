@@ -20,7 +20,7 @@ def handle_submit(judge, problem, solution_src, open_editor, copy):
         cfg = tomllib.load(f)
     
     solution_dir = os.path.join(os.getcwd(), "problems", judge, problem)
-    solution_path = os.path.join(solution_dir, "{}.c".format(solution_src))
+    solution_path = os.path.join(solution_dir, f"{solution_src}.c")
     if not os.path.exists(solution_path):
         click.echo("Problem {}/{} does not exist.".format(judge, problem), err=True)
         exit(1)
@@ -28,7 +28,7 @@ def handle_submit(judge, problem, solution_src, open_editor, copy):
     submission = preprocess(solution_path)
 
     submission_dir = os.path.join(os.getcwd(), "submissions", judge, problem)
-    submission_path = os.path.join(submission_dir, "{}.c".format(solution_src))
+    submission_path = os.path.join(submission_dir, f"{solution_src}.c")
     os.makedirs(submission_dir, exist_ok=True)
 
     with open(submission_path, "w") as f:

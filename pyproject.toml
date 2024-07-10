@@ -1,6 +1,6 @@
 [project]
 name = "icanc"
-version = "0.3.3"
+version = "0.4.0"
 description = "A C preprocessor and command line utility for leetcode."
 readme = "README.md"
 license = { file = "README" }

@@ -1,11 +1,12 @@
 import click
 import os
 import subprocess
+from ..common.rc import config
 
 def build(src_path, submission_path, bin_path):
     result = subprocess.run(
         [
-            "gcc",
+            config["compiler"],
             submission_path,
             "-o", bin_path,
             "-I", os.path.join(os.getcwd(), "include")

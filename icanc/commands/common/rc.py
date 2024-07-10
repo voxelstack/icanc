@@ -3,6 +3,7 @@ import tomllib
 
 config = dict(
     editor = "code.cmd",
+    compiler = "gcc",
 )
 
 def preload_rc():

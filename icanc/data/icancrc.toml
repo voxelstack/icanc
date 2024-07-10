@@ -1,2 +1,2 @@
-# Command used for opening files on a text editor.
 editor = "code.cmd"
+compiler = "gcc"

@@ -1,6 +1,7 @@
 import os
 from .exception import NotFoundException
 from importlib.resources import files
+from .rc import preload_rc
 
 cwd = os.getcwd()
 dirs = [
@@ -31,3 +32,5 @@ def data_path(path):
 def ensure_cwd():
     if not os.path.exists(os.path.join(cwd, "icancrc.toml")):
         raise NotFoundException("config", "icancrc.toml", "Are you running from the project root?")
+    
+    preload_rc()

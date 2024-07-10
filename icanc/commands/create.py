@@ -2,9 +2,9 @@ import click
 import os
 import shutil
 import subprocess
-import tomllib
 from .common.exception import FoundException, NotFoundException
 from .common.paths import ensure_cwd, ensure_paths, icanc_path
+from .common.rc import config
 
 @click.group()
 def create():
@@ -16,7 +16,7 @@ def create():
 @click.argument("problem", type=str)
 @click.option("--template", type=str, default="main")
 @click.option("--solution", "solution_dst", default="solution", help="Name for the solution file.")
-@click.option("--open", "open_editor", is_flag=True, help="Open solution file on text editor.")
+@click.option("--edit", "open_editor", is_flag=True, help="Open solution file on text editor.")
 def solution(**kwargs):
     create_solution(**kwargs)
 
@@ -28,9 +28,6 @@ def create_solution(judge, problem, template, solution_dst, open_editor):
     template_path = icanc_path("templates", template_filename)
     if not os.path.exists(template_path):
         raise NotFoundException("template", f"./templates/{template_filename}")
-    
-    with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
-        cfg = tomllib.load(f)
     
     dir = icanc_path("problems", judge, problem)
     os.makedirs(dir, exist_ok=True)
@@ -45,12 +42,12 @@ def create_solution(judge, problem, template, solution_dst, open_editor):
     click.echo(f"Created blank solution: {solution_path_rel}")
 
     if open_editor:
-        subprocess.run([cfg["editor"], solution_path])
+        subprocess.run([config["editor"], solution_path])
 
 @create.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--open", "open_editor", is_flag=True, help="Open testcases file on text editor.")
+@click.option("--edit", "open_editor", is_flag=True, help="Open testcases file on text editor.")
 @click.option("--testcases", "testcases_dst", default="testcases", help="Name for the testcases file.")
 def testcases(**kwargs):
     create_testcases(**kwargs)
@@ -58,9 +55,6 @@ def testcases(**kwargs):
 def create_testcases(judge, problem, testcases_dst, open_editor):
     ensure_cwd()
     ensure_paths()
-
-    with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
-        cfg = tomllib.load(f)
     
     dir = icanc_path("problems", judge, problem)
     if not os.path.exists(dir):
@@ -84,7 +78,7 @@ def create_testcases(judge, problem, testcases_dst, open_editor):
     click.echo(f"Created blank testcases: {testcases_path_rel}")
 
     if open_editor:
-        subprocess.run([cfg["editor"], testcases_path])
+        subprocess.run([config["editor"], testcases_path])
 
 @click.command()
 @click.argument("judge", type=str)
@@ -92,7 +86,7 @@ def create_testcases(judge, problem, testcases_dst, open_editor):
 @click.option("--template", type=str, default="main")
 @click.option("--solution", "solution_dst", default="solution", help="Name for the solution file.")
 @click.option("--testcases", "testcases_dst", default="testcases", help="Name for the testcases file.")
-@click.option("--open", "open_editor", is_flag=True, help="Open solution file on text editor.")
+@click.option("--edit", "open_editor", is_flag=True, help="Open solution file on text editor.")
 def scaffold(judge, problem, template, solution_dst, testcases_dst, open_editor):
     """Create a solution and testcase files."""
     

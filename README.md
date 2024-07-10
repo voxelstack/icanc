@@ -153,7 +153,7 @@ The preprocessor respects the `#pragma once` directive and will not include a fi
 
 With `icanc`, you can create a header library inside the `include/` directory and include headers normally on your leetcode solution! No more messy solutions with all the code dumped into a single file.
 
-### `#pragma icanc include`
+### #pragma icanc include
 Including files from the `include/` directory **must** be done inside a `#pragma icanc include` block. Includes inside that block will be preprocessed recursively, and the include directives will be removed from the final submission. If you include a file from the `include/` directory outside a `#pragma icanc include` block, it will not be preprocessed and your submission will give you a compilation error.
 
 Headers that are normally available on online judges **must** be included outside the `#pragma icanc include` block.

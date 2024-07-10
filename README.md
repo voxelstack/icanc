@@ -1,5 +1,6 @@
-# icanc
+[![PyPI](https://github.com/voxelstack/icanc/actions/workflows/publish-to-pypi.yml/badge.svg)](https://pypi.org/project/icanc/)
 
+# icanc
 > Everything is so clear now.  
 > I can C!  
 > I can fight!

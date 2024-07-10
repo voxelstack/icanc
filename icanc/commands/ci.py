@@ -4,7 +4,7 @@ from pathlib import Path
 from .submit import handle_submit
 import sys
 from .tools.builder import build
-from .common.paths import ensure_paths, icanc_path
+from .common.paths import ensure_cwd, ensure_paths, icanc_path
 from .tools.runner import run
 from .tools.writer import present_ci_cases
 
@@ -15,6 +15,7 @@ def ci(**kwargs):
     handle_ci(**kwargs)
 
 def handle_ci(judge):
+    ensure_cwd()
     ensure_paths()
 
     problems_dir = icanc_path("problems")

@@ -3,7 +3,7 @@ import os
 from .submit import handle_submit
 import time
 from .tools.builder import build
-from .common.paths import ensure_paths, icanc_path
+from .common.paths import ensure_cwd, ensure_paths, icanc_path
 from .common.exception import NotFoundException
 from .tools.runner import run
 from .tools.writer import present_cases
@@ -21,6 +21,7 @@ def test(**kwargs):
     handle_test(**kwargs)
 
 def handle_test(judge, problem, solution_src, testcases_src, watch):
+    ensure_cwd()
     ensure_paths()
     
     solution_dir = icanc_path("problems", judge, problem)

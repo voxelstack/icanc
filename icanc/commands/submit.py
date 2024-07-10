@@ -4,7 +4,7 @@ import pyperclip
 import subprocess
 import tomllib
 from .common.exception import NotFoundException
-from .common.paths import ensure_paths, icanc_path
+from .common.paths import ensure_cwd, ensure_paths, icanc_path
 from .tools.preprocessor import preprocess
 
 @click.command()
@@ -18,6 +18,7 @@ def submit(**kwargs):
     handle_submit(**kwargs)
 
 def handle_submit(judge, problem, solution_src, open_editor, copy):
+    ensure_cwd()
     ensure_paths()
     
     with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:

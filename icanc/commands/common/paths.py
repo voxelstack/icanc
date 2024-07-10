@@ -1,4 +1,5 @@
 import os
+from .exception import NotFoundException
 from importlib.resources import files
 
 cwd = os.getcwd()
@@ -26,3 +27,7 @@ def icanc_path(dir, *argv):
 
 def data_path(path):
     return files("icanc.data").joinpath(path)
+
+def ensure_cwd():
+    if not os.path.exists(os.path.join(cwd, "icancrc.toml")):
+        raise NotFoundException("config", "icancrc.toml", "Are you running from the project root?")

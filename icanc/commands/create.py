@@ -4,7 +4,7 @@ import shutil
 import subprocess
 import tomllib
 from .common.exception import FoundException, NotFoundException
-from .common.paths import ensure_paths, icanc_path
+from .common.paths import ensure_cwd, ensure_paths, icanc_path
 
 @click.group()
 def create():
@@ -21,6 +21,7 @@ def solution(**kwargs):
     create_solution(**kwargs)
 
 def create_solution(judge, problem, template, solution_dst, open_editor):
+    ensure_cwd()
     ensure_paths()
 
     template_filename = f"{template}.c"
@@ -55,6 +56,9 @@ def testcases(**kwargs):
     create_testcases(**kwargs)
 
 def create_testcases(judge, problem, testcases_dst, open_editor):
+    ensure_cwd()
+    ensure_paths()
+
     with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
         cfg = tomllib.load(f)
     

@@ -1,6 +1,6 @@
-#pragma icc include
-#include <icc.h>
-#pragma icc end
+#pragma icanc include
+#include <icanc.h>
+#pragma icanc end
 
 int main()
 {

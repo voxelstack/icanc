@@ -26,8 +26,8 @@ def init(name):
         with open(os.path.join(dir, "README.md"), "w") as dst:
             dst.write(readme)
     
-    click.echo("\nInitialized icc project at ./{}".format(name))
-    click.echo("Get started with cd ./{} && icc --help".format(name))
+    click.echo("\nInitialized icanc project at ./{}".format(name))
+    click.echo("Get started with cd ./{} && icanc --help".format(name))
 
 def read_git_config(config):
     res = subprocess.run(["git", "config", config], stdout=subprocess.PIPE)

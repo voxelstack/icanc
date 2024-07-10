@@ -11,4 +11,3 @@ def preload_rc():
     with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
         config_file = tomllib.load(f)
         config = config | config_file
-        print(config)

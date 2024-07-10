@@ -45,7 +45,7 @@ icanc submit beecrowd 1000 --copy
 
 The `--copy` from the previous command copied the resulting submission to the clipboard, so you can go paste it on [beecrowd/1000](https://judge.beecrowd.com/en/problems/view/1000) and submit.
 
-### `world.execute(me)`
+### world.execute(me)
 That's the gist of it!
 
 To solve [another problem](https://judge.beecrowd.com/en/problems/view/1001), scaffold a new solution:
@@ -61,6 +61,32 @@ You can run the test command in watch mode. While running, it will watch for cha
 # Test the default solution.c using testcases.toml
 # Rerun on change.
 icanc test beecrowd 1000 --watch
+```
+
+### Multiple solutions
+You may want to have multiple solutions for the same problem, either to practice different algorithms, optimize for different parameters, or showcase and compare alternate solutions.
+
+To create a new solution for an existing problem, you can use the `--solution` option:
+
+```bash
+# Create a new solution for beecrowd/1000 called alt.c
+icanc create solution beecrowd 1000 --solution alt
+
+# Test your new solution
+icanc test beecrowd 1000 --solution alt
+```
+
+### Multiple testcases
+You may want to have multiple testcases for the same problem, either to organize your tests or to copy samples from something like [udebug](https://www.udebug.com/). When you test your solution, all testcases will be used.
+
+To create new testcases for an existing problem, you can use the `--testcases` option:
+
+```bash
+# Create a new testcases file for beecrowd/1000 called alt.
+icanc create testcases beecrowd 1000 --testcases alt
+
+# Test your solution.
+icanc test beecrowd 1000
 ```
 
 ## Project structure

@@ -10,7 +10,7 @@ Learning data structures and algorithms **should** be done in C. Leetcode is a g
 `icanc` is a C preprocessor for bundling includes into a single source file you can submit to online judges. It also includes quality of life commands for generating source files and testing solutions.
 
 ## See it in action
-> TODO Demo video
+https://github.com/voxelstack/icanc/assets/87827018/70e1ba31-66c9-4126-8a54-a9a946ecf740
 
 [My leetcode repository](https://github.com/voxelstack/leet) is powered by `icanc`.
 

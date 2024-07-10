@@ -2,16 +2,18 @@ import click
 import os
 import shutil
 import subprocess
+from .common.exception import FoundException
 
 @click.command()
 @click.option("--name", prompt=True, default="leet")
-def init(name):
+def init(**kwargs):
     """Initialize an empty icanc project."""
+    handle_init(**kwargs)
 
+def handle_init(name):
     dir = os.path.join(os.getcwd(), name)
     if os.path.exists(dir):
-        click.echo("Directory ./{} already exists.".format(name), err=True)
-        exit(1)
+        raise FoundException("project", f"./{name}/")
     os.makedirs(dir)
 
     res_dir = os.path.join(os.path.dirname(__file__), "..", "data")

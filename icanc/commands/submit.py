@@ -3,7 +3,8 @@ import os
 import pyperclip
 import subprocess
 import tomllib
-from .common.paths import icanc_path
+from .common.exception import NotFoundException
+from .common.paths import ensure_paths, icanc_path
 from .tools.preprocessor import preprocess
 
 @click.command()
@@ -14,22 +15,23 @@ from .tools.preprocessor import preprocess
 @click.option("--copy", is_flag=True, help="Copy submission to clipboard.")
 def submit(**kwargs):
     """Bundle solution into a single source file for submission."""
-
     handle_submit(**kwargs)
 
 def handle_submit(judge, problem, solution_src, open_editor, copy):
+    ensure_paths()
+    
     with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
         cfg = tomllib.load(f)
     
-    solution_path = icanc_path("problems", judge, problem, f"{solution_src}.c")
+    solution_filename = f"{solution_src}.c"
+    solution_path_rel = f"./{judge}/{problem}/{solution_filename}"
+    solution_path = icanc_path("problems", judge, problem, solution_filename)
     if not os.path.exists(solution_path):
-        click.echo("Problem {}/{} does not exist.".format(judge, problem), err=True)
-        exit(1)
-
+        raise NotFoundException("solution", solution_path_rel)
     submission = preprocess(solution_path)
 
     submission_dir = icanc_path("submissions", judge, problem)
-    submission_path = icanc_path("submissions", judge, problem, f"{solution_src}.c")
+    submission_path = icanc_path("submissions", judge, problem, solution_filename)
     os.makedirs(submission_dir, exist_ok=True)
 
     with open(submission_path, "w") as f:

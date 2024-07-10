@@ -6,6 +6,8 @@ readme = "README.md"
 license = { file = "README" }
 keywords = ["leetcode", "c"]
 dependencies = ["click==8.*", "pyperclip==1.*", "watchdog==4.*"]
+[tool.setuptools]
+packages = ["icanc"]
 [[project.authors]]
 name = "voxelstack"
 email = "voxelstack@gmail.com"

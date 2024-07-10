@@ -85,8 +85,3 @@ def present_ci_cases(cases):
             click.secho(f"      × {name}")
         
         fails.append(case)
-    
-    if len(fails) == 0:
-        click.secho("      PASS")
-    else:
-        click.secho("      FAIL ")

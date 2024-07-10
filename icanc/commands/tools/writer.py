@@ -11,23 +11,23 @@ def present_cases(cases):
         error = case["error"]
 
         if error == None:
-            click.secho("✓ ", fg="green", nl=False)
+            click.secho("  ✓ ", fg="green", nl=False)
             click.secho(name, bold=True)
             continue
 
         if error == "invalid_case":
-            click.secho("⚠ ", fg="red", nl=False)
+            click.secho("  ⚠ ", fg="red", nl=False)
             click.secho(name, bold=True, nl=False)
             click.echo(" (invalid testcase)")
         elif error == "runtime":
-            click.secho("⚠ ", fg="red", nl=False)
+            click.secho("  ⚠ ", fg="red", nl=False)
             click.secho(name, bold=True, nl=False)
             click.echo(" (runtime error)")
         elif error == "presentation":
-            click.secho("× ", fg="yellow", nl=False)
+            click.secho("  × ", fg="yellow", nl=False)
             click.secho(name, bold=True)
         elif error == "wrong_answer":
-            click.secho("× ", fg="red", nl=False)
+            click.secho("  × ", fg="red", nl=False)
             click.secho(name, bold=True)
         
         fails.append(case)

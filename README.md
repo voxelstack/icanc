@@ -24,10 +24,8 @@ pipx install icanc
 `icanc` creates a leetcode repository for you. Commands must be ran from inside the project root.
 
 ```bash
-icanc init
 # Follow the prompts to create a project.
-
-cd <project name>
+icanc init
 ```
 
 ### Try it out
@@ -42,7 +40,7 @@ icanc test beecrowd 1000
 The test should pass, which means we are ready to submit:
 ```bash
 # Generate the submission for the default solution.c.
-icanc submit beecrowd --copy
+icanc submit beecrowd 1000 --copy
 ```
 
 The `--copy` from the previous command copied the resulting submission to the clipboard, so you can go paste it on [beecrowd/1000](https://judge.beecrowd.com/en/problems/view/1000) and submit.

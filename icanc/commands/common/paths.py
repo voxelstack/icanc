@@ -1,4 +1,5 @@
 import os
+from importlib.resources import files
 
 cwd = os.getcwd()
 dirs = [
@@ -22,3 +23,6 @@ def icanc_path(dir, *argv):
         path = os.path.join(path, arg)
 
     return path
+
+def data_path(path):
+    return files("icanc.data").joinpath(path)

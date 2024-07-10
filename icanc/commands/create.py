@@ -14,7 +14,7 @@ def create():
 @create.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--template", type=str, required=True)
+@click.option("--template", type=str, default="main")
 @click.option("--solution", "solution_dst", default="solution", help="Name for the solution file.")
 @click.option("--open", "open_editor", is_flag=True, help="Open solution file on text editor.")
 def solution(**kwargs):
@@ -85,7 +85,7 @@ def create_testcases(judge, problem, testcases_dst, open_editor):
 @click.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--template", type=click.Path(exists=True), required=True)
+@click.option("--template", type=str, default="main")
 @click.option("--solution", "solution_dst", default="solution", help="Name for the solution file.")
 @click.option("--testcases", "testcases_dst", default="testcases", help="Name for the testcases file.")
 @click.option("--open", "open_editor", is_flag=True, help="Open solution file on text editor.")

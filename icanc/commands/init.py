@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 from .common.exception import FoundException
+from .common.paths import data_path
 
 @click.command()
 @click.option("--name", prompt=True, default="leet")
@@ -16,20 +17,20 @@ def handle_init(name):
         raise FoundException("project", f"./{name}/")
     os.makedirs(dir)
 
-    res_dir = os.path.join(os.path.dirname(__file__), "..", "data")
-
-    os.makedirs(os.path.join(dir, "problems"))
-    shutil.copy2(os.path.join(res_dir, "icancrc.toml"), dir)
-    shutil.copy2(os.path.join(res_dir, "LICENSE"), dir)
-    shutil.copytree(os.path.join(res_dir, "include"), os.path.join(dir, "include"))
-    shutil.copytree(os.path.join(res_dir, "templates"), os.path.join(dir, "templates"))
-    with open(os.path.join(res_dir, "README.md"), "r") as src:
+    shutil.copy2(data_path("icancrc.toml"), dir)
+    shutil.copy2(data_path("LICENSE"), dir)
+    shutil.copytree(data_path("include"), os.path.join(dir, "include"))
+    shutil.copytree(data_path("templates"), os.path.join(dir, "templates"))
+    shutil.copytree(data_path("problems"), os.path.join(dir, "problems"))
+    with open(data_path("README.md"), "r") as src:
         readme = src.read().format(name=name)
         with open(os.path.join(dir, "README.md"), "w") as dst:
             dst.write(readme)
     
-    click.echo("\nInitialized icanc project at ./{}".format(name))
-    click.echo("Get started with cd ./{} && icanc --help".format(name))
+    click.secho("\n DONE ", bg="green", nl=False);
+    click.secho(f" Your project was created at {name}/", fg="green")
+    click.secho("Get started with",  nl=False)
+    click.secho(f" cd {name} && icanc --help", bold=True)
 
 def read_git_config(config):
     res = subprocess.run(["git", "config", config], stdout=subprocess.PIPE)

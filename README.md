@@ -41,10 +41,10 @@ icanc test beecrowd 1000
 The test should pass, which means we are ready to submit:
 ```bash
 # Generate the submission for the default solution.c.
-icanc submit beecrowd 1000 --copy
+icanc submit beecrowd 1000 -c
 ```
 
-The `--copy` from the previous command copied the resulting submission to the clipboard, so you can go paste it on [beecrowd/1000](https://judge.beecrowd.com/en/problems/view/1000) and submit.
+The `-c` from the previous command copied the resulting submission to the clipboard, so you can go paste it on [beecrowd/1000](https://judge.beecrowd.com/en/problems/view/1000) and submit.
 
 ### world.execute(me)
 That's the gist of it!
@@ -52,7 +52,7 @@ That's the gist of it!
 To solve [another problem](https://judge.beecrowd.com/en/problems/view/1001), scaffold a new solution:
 ```bash
 # Create a solution and testcases for beecrowd/1001
-icanc scaffold beecrowd 1000 --template solve_one
+icanc scaffold beecrowd 1000
 ```
 
 ### Watching for changes
@@ -61,7 +61,7 @@ You can run the test command in watch mode. While running, it will watch for cha
 ```bash
 # Test the default solution.c using testcases.toml
 # Rerun on change.
-icanc test beecrowd 1000 --watch
+icanc test beecrowd 1000 -w
 ```
 
 ### Multiple solutions
@@ -71,10 +71,10 @@ To create a new solution for an existing problem, you can use the `--solution` o
 
 ```bash
 # Create a new solution for beecrowd/1000 called alt.c
-icanc create solution beecrowd 1000 --solution alt
+icanc create solution beecrowd 1000 -s alt
 
 # Test your new solution
-icanc test beecrowd 1000 --solution alt
+icanc test beecrowd 1000 -s alt
 ```
 
 ### Multiple testcases
@@ -84,7 +84,7 @@ To create new testcases for an existing problem, you can use the `--testcases` o
 
 ```bash
 # Create a new testcases file for beecrowd/1000 called alt.
-icanc create testcases beecrowd 1000 --testcases alt
+icanc create testcases beecrowd 1000 -t alt
 
 # Test your solution.
 icanc test beecrowd 1000
@@ -138,9 +138,7 @@ When solutions get bundled for submitting, the resulting sources will be placed 
 You **should not** commit this folder (the generated `.gitignore` already takes care of that).
 
 ### `templates/`
-When you create a new solution to a problem, it copies the source code from a given template. Those templates live in the `templates/` folder.
-
-You **may** add new templates but they **must not** be in subfolders.
+When you create a new solution to a problem, it copies the source code from a given template. Those templates live in the `templates/` folder. You are free to manage your own templates, but keep in mind that `main.c` is the default and **should not** be removed.
 
 ### `icancrc.toml`
 This file allows you to configure `icanc` for the current project.

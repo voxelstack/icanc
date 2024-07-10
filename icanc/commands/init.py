@@ -7,7 +7,7 @@ from .common.exception import FoundException
 @click.command()
 @click.option("--name", prompt=True, default="leet")
 def init(**kwargs):
-    """Initialize an empty icanc project."""
+    """Initialize an icanc project."""
     handle_init(**kwargs)
 
 def handle_init(name):

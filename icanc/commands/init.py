@@ -30,7 +30,7 @@ def handle_init(name, git):
     
     if git:
         shutil.copy2(data_path(".gitignore"), dir)
-        subprocess.run(["git", "init"])
+        subprocess.run(["git", "init", dir])
     
     click.secho("\n DONE ", bg="green", nl=False);
     click.secho(f" Your project was created at {name}/", fg="green")

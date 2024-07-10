@@ -14,9 +14,9 @@ def create():
 @create.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--template", type=str, default="main")
-@click.option("--solution", "solution_dst", default="solution", help="Name for the solution file.")
-@click.option("--edit", "open_editor", is_flag=True, help="Open solution file on text editor.")
+@click.option("-t", "--template", type=str, default="main")
+@click.option("-s", "--solution", "solution_dst", default="solution", help="Name for the solution file.")
+@click.option("-e", "--edit", "open_editor", is_flag=True, help="Open solution file on text editor.")
 def solution(**kwargs):
     create_solution(**kwargs)
 
@@ -47,8 +47,8 @@ def create_solution(judge, problem, template, solution_dst, open_editor):
 @create.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--edit", "open_editor", is_flag=True, help="Open testcases file on text editor.")
-@click.option("--testcases", "testcases_dst", default="testcases", help="Name for the testcases file.")
+@click.option("-t", "--testcases", "testcases_dst", default="testcases", help="Name for the testcases file.")
+@click.option("-e", "--edit", "open_editor", is_flag=True, help="Open testcases file on text editor.")
 def testcases(**kwargs):
     create_testcases(**kwargs)
 
@@ -83,10 +83,10 @@ def create_testcases(judge, problem, testcases_dst, open_editor):
 @click.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--template", type=str, default="main")
+@click.option("-t", "--template", type=str, default="main")
 @click.option("--solution", "solution_dst", default="solution", help="Name for the solution file.")
 @click.option("--testcases", "testcases_dst", default="testcases", help="Name for the testcases file.")
-@click.option("--edit", "open_editor", is_flag=True, help="Open solution file on text editor.")
+@click.option("-e", "--edit", "open_editor", is_flag=True, help="Open solution file on text editor.")
 def scaffold(judge, problem, template, solution_dst, testcases_dst, open_editor):
     """Create a solution and testcase files."""
     

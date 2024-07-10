@@ -10,9 +10,9 @@ from .tools.preprocessor import preprocess
 @click.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--solution", "solution_src", default="solution", help="Which solution file to submit.")
-@click.option("--edit", "open_editor", is_flag=True, help="Open submission file on text editor.")
-@click.option("--copy", is_flag=True, help="Copy submission to clipboard.")
+@click.option("-s", "--solution", "solution_src", default="solution", help="Which solution file to submit.")
+@click.option("-e", "--edit", "open_editor", is_flag=True, help="Open submission file on text editor.")
+@click.option("-c", "--copy", is_flag=True, help="Copy submission to clipboard.")
 def submit(**kwargs):
     """Bundle solution into a single source file for submission."""
     handle_submit(**kwargs)

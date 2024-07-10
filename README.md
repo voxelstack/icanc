@@ -5,7 +5,7 @@
 > I can C!  
 > I can fight!
 
-Learning data structures and algorithms should be done in C. Leetcode is a good way to practice and showcase coding skills, but I have never been thrilled about being constrained to a single source file.
+Learning data structures and algorithms **should** be done in C. Leetcode is a good way to practice and showcase coding skills, but I have never been thrilled about being constrained to a single source file.
 
 `icanc` is a C preprocessor for bundling includes into a single source file you can submit to online judges. It also includes quality of life commands for generating source files and testing solutions.
 

@@ -9,7 +9,7 @@ from .tools.runner import run
 from .tools.writer import present_ci_cases
 
 @click.command()
-@click.option("--judge", type=str, help="Only test one judge.")
+@click.option("-j", "--judge", type=str, help="Only test one judge.")
 def ci(**kwargs):
     """Test everything with machine friendly output and exit codes."""
     handle_ci(**kwargs)

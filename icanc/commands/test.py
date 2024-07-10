@@ -13,9 +13,9 @@ from watchdog.observers import Observer
 @click.command()
 @click.argument("judge", type=str)
 @click.argument("problem", type=str)
-@click.option("--solution", "solution_src", default="solution", help="Which solution to test.")
-@click.option("--testcases", "testcases_src", multiple=True, help="Which testcases to test against.")
-@click.option("--watch", is_flag=True, help="Rerun on changes to the problem or include directories.")
+@click.option("-s", "--solution", "solution_src", default="solution", help="Which solution to test.")
+@click.option("-t", "--testcases", "testcases_src", multiple=True, help="Which testcases to test against.")
+@click.option("-w", "--watch", is_flag=True, help="Rerun on changes to the problem or include directories.")
 def test(**kwargs):
     """Test a solution against given testcases."""
     handle_test(**kwargs)

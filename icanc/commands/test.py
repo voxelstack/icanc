@@ -3,6 +3,7 @@ import os
 from .submit import handle_submit
 import time
 from .tools.builder import build
+from .common.paths import icanc_path
 from .tools.runner import run
 from .tools.writer import present_cases
 from watchdog.events import FileSystemEventHandler
@@ -20,17 +21,14 @@ def test(**kwargs):
     handle_test(**kwargs)
 
 def handle_test(judge, problem, solution_src, testcases_src, watch):
-    solution_dir = os.path.join(os.getcwd(), "problems", judge, problem)
-    solution_path = os.path.join(solution_dir, f"{solution_src}.c")
-    submission_dir = os.path.join(os.getcwd(), "submissions", judge, problem)
-    submission_path = os.path.join(submission_dir, "{}.c".format(solution_src))
-    
-    include_dir = os.path.join(os.getcwd(), "include")
-    binary_dir = os.path.join(os.getcwd(), "binaries", judge, problem)
-    binary_path = os.path.join(binary_dir, solution_src)
+    solution_dir = icanc_path("problems", judge, problem)
+    solution_path = icanc_path("problems", judge, problem, f"{solution_src}.c")
+    submission_path = icanc_path("submissions", judge, problem, f"{solution_src}.c")
+    include_dir = icanc_path("include")
+    binary_dir = icanc_path("binaries", judge, problem)
+    binary_path = icanc_path("binaries", judge, problem, solution_src)
+    testcases_dir = icanc_path("problems", judge, problem)
     os.makedirs(binary_dir, exist_ok=True)
-
-    testcases_dir = os.path.join(os.getcwd(), "problems", judge, problem) 
 
     # click.clear() leaves uncleared lines if files change too fast.
     def clear():
@@ -65,7 +63,7 @@ def handle_test(judge, problem, solution_src, testcases_src, watch):
             if result != 0:
                 return
 
-            testcase_path = os.path.join(testcases_dir, testcase)
+            testcase_path = icanc_path("problems", judge, problem, testcase)
             runs = run(binary_path, testcase_path)
             present_cases(runs)
 

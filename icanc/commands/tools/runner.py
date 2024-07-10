@@ -3,8 +3,8 @@ import difflib
 import os
 import subprocess
 
-def run(binary, testcases):
-    with open(testcases, "rb") as f:
+def run(bin_path, testcases_path):
+    with open(testcases_path, "rb") as f:
         cases = tomllib.load(f).items()
         runs = []
 
@@ -17,7 +17,7 @@ def run(binary, testcases):
                 continue
 
             result = subprocess.run(
-                binary,
+                bin_path,
                 input=case.get("in"),
                 capture_output=True,
                 text=True,

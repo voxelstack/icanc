@@ -3,11 +3,11 @@ import os
 import shutil
 import subprocess
 import tomllib
+from .common.paths import icanc_path
 
 @click.group()
 def create():
     """Create solutions or testcases."""
-
     pass
 
 @create.command()
@@ -23,10 +23,10 @@ def create_solution(judge, problem, template, solution_dst, open_editor):
     with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
         cfg = tomllib.load(f)
     
-    dir = os.path.join(os.getcwd(), "problems", judge, problem)
+    dir = icanc_path("problems", judge, problem)
     os.makedirs(dir, exist_ok=True)
 
-    solution_path = os.path.join(dir, "{}.c".format(solution_dst))
+    solution_path = icanc_path("problems", judge, problem, f"{solution_dst}.c")
     shutil.copy2(template, solution_path)
     
     click.echo("Created blank solution: ./problems/{}/{}/{}.c".format(judge, problem, solution_dst))
@@ -46,13 +46,12 @@ def create_testcases(judge, problem, testcases_dst, open_editor):
     with open(os.path.join(os.getcwd(), "icancrc.toml"), "rb") as f:
         cfg = tomllib.load(f)
     
-    dir = os.path.join(os.getcwd(), "problems", judge, problem)
+    dir = icanc_path("problems", judge, problem)
     if not os.path.exists(dir):
         click.echo("Problem {}/{} does not exist.".format(judge, problem), err=True)
         exit(1)
     os.makedirs(dir, exist_ok=True)
-
-    testcases_path = os.path.join(dir, "{}.toml".format(testcases_dst))
+    testcases_path = icanc_path("problems", judge, problem, f"{testcases_dst}.toml")
     
     with open(testcases_path, "w") as f:
         f.writelines([

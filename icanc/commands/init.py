@@ -7,11 +7,12 @@ from .common.paths import data_path
 
 @click.command()
 @click.option("--name", prompt=True, default="leet")
+@click.option("--git", prompt="Initialize git repository", default=True, )
 def init(**kwargs):
     """Initialize an icanc project."""
     handle_init(**kwargs)
 
-def handle_init(name):
+def handle_init(name, git):
     dir = os.path.join(os.getcwd(), name)
     if os.path.exists(dir):
         raise FoundException("project", f"./{name}/")
@@ -26,6 +27,10 @@ def handle_init(name):
         readme = src.read().format(name=name)
         with open(os.path.join(dir, "README.md"), "w") as dst:
             dst.write(readme)
+    
+    if git:
+        shutil.copy2(data_path(".gitignore"), dir)
+        subprocess.run(["git", "init"])
     
     click.secho("\n DONE ", bg="green", nl=False);
     click.secho(f" Your project was created at {name}/", fg="green")

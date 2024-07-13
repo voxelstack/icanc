@@ -12,6 +12,8 @@ Learning data structures and algorithms **should** be done in C. Leetcode is a g
 ## See it in action
 https://github.com/voxelstack/icanc/assets/87827018/70e1ba31-66c9-4126-8a54-a9a946ecf740
 
+https://github.com/user-attachments/assets/9b905f69-1135-405a-b487-58f4b061912e
+
 [My leetcode repository](https://github.com/voxelstack/leet) is powered by `icanc`.
 
 ## Getting started

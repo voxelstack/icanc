@@ -5,6 +5,7 @@ from .submit import handle_submit
 import sys
 from .tools.builder import build
 from .common.paths import ensure_cwd, ensure_paths, icanc_path
+from .tools.preprocessor import preprocess
 from .tools.runner import run
 from .tools.writer import present_ci_cases
 
@@ -19,6 +20,7 @@ def handle_ci(judge):
     ensure_paths()
 
     problems_dir = icanc_path("problems")
+    preprocess_cache = {}
 
     judges = []
     if judge:
@@ -50,7 +52,14 @@ def handle_ci(judge):
                 binary_path = icanc_path("binaries", judge, Path(solution).stem)
                 os.makedirs(binary_dir, exist_ok=True)
 
-                handle_submit(judge, problem, Path(solution).stem, False, False)
+                submission_dir = icanc_path("submissions", judge, problem)
+                submission_path = icanc_path("submissions", judge, problem, solution)
+                os.makedirs(submission_dir, exist_ok=True)
+
+                submission = preprocess(solution_path, preprocess_cache)
+                with open(submission_path, "w") as f:
+                    f.write(submission)
+
                 result = build(solution_path, submission_path, binary_path)
                 if result != 0:
                     return -1

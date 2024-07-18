@@ -26,7 +26,7 @@ def handle_submit(judge, problem, solution_src, open_editor, copy):
     solution_path = icanc_path("problems", judge, problem, solution_filename)
     if not os.path.exists(solution_path):
         raise NotFoundException("solution", solution_path_rel)
-    submission = preprocess(solution_path)
+    submission = preprocess(solution_path, {})
 
     submission_dir = icanc_path("submissions", judge, problem)
     submission_path = icanc_path("submissions", judge, problem, solution_filename)

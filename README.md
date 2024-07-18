@@ -54,7 +54,7 @@ That's the gist of it!
 To solve [another problem](https://judge.beecrowd.com/en/problems/view/1001), scaffold a new solution:
 ```bash
 # Create a solution and testcases for beecrowd/1001
-icanc scaffold beecrowd 1000
+icanc scaffold beecrowd 1001
 ```
 
 ### Watching for changes
@@ -69,7 +69,7 @@ icanc test beecrowd 1000 -w
 ### Multiple solutions
 You may want to have multiple solutions for the same problem, either to practice different algorithms, optimize for different parameters, or showcase and compare alternate solutions.
 
-To create a new solution for an existing problem, you can use the `--solution` option:
+To create a new solution for an existing problem, you can use the `-s` option:
 
 ```bash
 # Create a new solution for beecrowd/1000 called alt.c
@@ -82,7 +82,7 @@ icanc test beecrowd 1000 -s alt
 ### Multiple testcases
 You may want to have multiple testcases for the same problem, either to organize your tests or to copy samples from something like [udebug](https://www.udebug.com/). When you test your solution, all testcases will be used.
 
-To create new testcases for an existing problem, you can use the `--testcases` option:
+To create new testcases for an existing problem, you can use the `-t` option:
 
 ```bash
 # Create a new testcases file for beecrowd/1000 called alt.

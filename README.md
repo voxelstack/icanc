@@ -10,9 +10,14 @@ Learning data structures and algorithms **should** be done in C. Leetcode is a g
 `icanc` is a C preprocessor for bundling includes into a single source file you can submit to online judges. It also includes quality of life commands for generating source files and testing solutions.
 
 ## See it in action
+### Utilities
 https://github.com/voxelstack/icanc/assets/87827018/70e1ba31-66c9-4126-8a54-a9a946ecf740
 
+### Preprocessor
 https://github.com/user-attachments/assets/9b905f69-1135-405a-b487-58f4b061912e
+
+### udebug integration
+https://github.com/user-attachments/assets/06268dd6-3705-4504-9b4d-c36a8c920e58
 
 ## See an example
 [My leetcode repository](https://github.com/voxelstack/leet) is powered by `icanc`.
@@ -106,6 +111,8 @@ min_votes = 5 # Inputs that have less than min_votes
 ```
 
 And remap your judge names to the names used by the udebug API. For example, my leetcode repo uses the name `beecrowd`, while udebug uses `URI`:
+
+> Special thank you to Vinit Shah for the help with API access.
 
 ```toml
 [udebug.judge_alias]

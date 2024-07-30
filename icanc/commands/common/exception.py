@@ -44,3 +44,19 @@ class InvalidSourceException(IcancException):
             f"invalid {entity} at {id}",
             hint,
         )
+
+class InvalidCommandException(IcancException):
+    def __init__(self, error, hint=None):
+        super().__init__(
+            "invalid command",
+            error,
+            hint
+        )
+
+class NetworkException(IcancException):
+    def __init__(self, status, error, hint=None):
+        super().__init__(
+            f"network error ({status})",
+            error,
+            hint
+        )

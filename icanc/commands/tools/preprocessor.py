@@ -13,7 +13,7 @@ def preprocess_source(path, cache, included):
     
     # TODO Relative paths would be clearer for errors.
     filename = f"{os.path.basename(path)}"
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         source = iter(f.readlines())
         preprocessed_source = []
         pragma_once = False

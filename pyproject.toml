@@ -1,11 +1,17 @@
 [project]
 name = "icanc"
-version = "0.4.2"
+version = "0.5.0"
 description = "A C preprocessor and command line utility for leetcode."
 readme = "README.md"
 license = { file = "README" }
 keywords = ["leetcode", "c"]
-dependencies = ["click==8.*", "pyperclip==1.*", "watchdog==4.*"]
+dependencies = [
+    "click==8.*",
+    "pyperclip==1.*",
+    "watchdog==4.*",
+    "tomli_w==1.*",
+    "keyring==25.*",
+]
 [tool.setuptools]
 packages = [
     "icanc",

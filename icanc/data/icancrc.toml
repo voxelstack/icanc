@@ -1,2 +1,11 @@
 editor = "code.cmd"
 compiler = "gcc"
+
+# To use the udebug integration you must have **API access** to udebug.
+
+# [udebug]
+# min_votes = 5 # Inputs that have less than min_votes
+#               # will not be downloaded.
+# [udebug.judge_alias]
+# beecrowd = "URI" # Map the judge names used on your repo
+#                  # to the judge names used on udebug.

@@ -6,6 +6,7 @@ from .commands.init import init
 from .commands.submit import submit
 from .commands.test import test
 from .commands.ci import ci
+from .commands.udebug import udebug
 from .commands.common.exception import IcancException
 
 @click.group()
@@ -18,6 +19,7 @@ icanc.add_command(scaffold)
 icanc.add_command(submit)
 icanc.add_command(test)
 icanc.add_command(ci)
+icanc.add_command(udebug)
 
 def main():
     try:

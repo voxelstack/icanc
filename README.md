@@ -92,25 +92,56 @@ icanc create testcases beecrowd 1000 -t alt
 icanc test beecrowd 1000
 ```
 
-## Project structure
+### udebug integration
+
+If you have [**API access**](https://www.udebug.com/api-documentation) to udebug, icanc can download udebug testcases for you.
+
+On `icancrc.toml`, configure the minimum amount of votes a udebug input must have to be downloaded (defaults to 5):
+
+```toml
+[udebug]
+min_votes = 5 # Inputs that have less than min_votes
+              # will not be downloaded.
 ```
+
+And remap your judge names to the names used by the udebug API. For example, my leetcode repo uses the name `beecrowd`, while udebug uses `URI`:
+
+```toml
+[udebug.judge_alias]
+beecrowd = "URI" # Map the judge names used on your repo
+                 # to the judge names used on udebug.
+```
+
+After configuring icanc, authenticate with udebug:
+```bash
+# Store your username and password to the system keyring.
+icanc udebug auth
+```
+
+And then you can download testcases directly from udebug:
+```bash
+icanc create testcases beecrowd 1069 -u
+```
+
+## Project structure
+````
 leet/
 ├─ binaries/
 ├─ include/
-│  └─ icanc.h
+│ └─ icanc.h
 ├─ problems/
-│  └─ beecrowd/
-│     └─ 1000/
-│        ├─ solution.c
-│        └─ testcases.toml
+│ └─ beecrowd/
+│ └─ 1000/
+│ ├─ solution.c
+│ └─ testcases.toml
 ├─ submissions/
 ├─ templates/
-│  ├─ solve_one.c
-│  └─ solve_many.c
+│ ├─ solve_one.c
+│ └─ solve_many.c
 ├─ icancrc.toml
 ├─ LICENSE
 └─ README.md
-```
+````
 
 ### `leet/`
 The `init` command will create a project folder with a name of your choice. All your code lives inside this folder, and this is where you should run commands from.
@@ -132,7 +163,7 @@ Your problem solutions live here, along with their testcases. They are organized
 
 `icanc` generates these files for you, so you **should not** create files manually here.
 
- ### `submissions/`
+### `submissions/`
 When solutions get bundled for submitting, the resulting sources will be placed on the `submissions/` folder. They are organized in subfolders by judge and problem.
 
 `icanc` can copy submissions to the clipboard automatically, so you **should not** need to interact with this folder.
@@ -168,7 +199,7 @@ void say()
 {
     printf("Hello from icanc.h");
 }
-```
+````
 
 ```c
 // include/greeter.h
@@ -176,7 +207,7 @@ void say()
 /*
  * icanc.h is from our header library,
  * it must be included inside a #pragma icanc include block.
- * 
+ *
  * You may add multiple include directives inside the same block.
  */
 #pragma icanc include
@@ -226,3 +257,6 @@ Bundle solution into a single source file for submission.
 
 ### `test`
 Test a solution against given testcases.
+
+### `udebug`
+udebug integration.

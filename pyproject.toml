@@ -1,6 +1,6 @@
 [project]
 name = "icanc"
-version = "0.5.0"
+version = "0.5.1"
 description = "A C preprocessor and command line utility for leetcode."
 readme = "README.md"
 license = { file = "README" }
@@ -11,6 +11,7 @@ dependencies = [
     "watchdog==4.*",
     "tomli_w==1.*",
     "keyring==25.*",
+    "requests==2.*",
 ]
 [tool.setuptools]
 packages = [

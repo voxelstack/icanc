@@ -111,9 +111,6 @@ min_votes = 5 # Inputs that have less than min_votes
 ```
 
 And remap your judge names to the names used by the udebug API. For example, my leetcode repo uses the name `beecrowd`, while udebug uses `URI`:
-
-> Special thank you to Vinit Shah for the help with API access.
-
 ```toml
 [udebug.judge_alias]
 beecrowd = "URI" # Map the judge names used on your repo
@@ -130,6 +127,8 @@ And then you can download testcases directly from udebug:
 ```bash
 icanc create testcases beecrowd 1069 -u
 ```
+
+> Special thank you to Vinit Shah for the help with API access.
 
 ## Project structure
 ```

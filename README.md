@@ -125,24 +125,24 @@ icanc create testcases beecrowd 1069 -u
 ```
 
 ## Project structure
-````
+```
 leet/
 ├─ binaries/
 ├─ include/
-│ └─ icanc.h
+│  └─ icanc.h
 ├─ problems/
-│ └─ beecrowd/
-│ └─ 1000/
-│ ├─ solution.c
-│ └─ testcases.toml
+│  └─ beecrowd/
+│     └─ 1000/
+│        ├─ solution.c
+│        └─ testcases.toml
 ├─ submissions/
 ├─ templates/
-│ ├─ solve_one.c
-│ └─ solve_many.c
+│  ├─ solve_one.c
+│  └─ solve_many.c
 ├─ icancrc.toml
 ├─ LICENSE
 └─ README.md
-````
+```
 
 ### `leet/`
 The `init` command will create a project folder with a name of your choice. All your code lives inside this folder, and this is where you should run commands from.
@@ -200,7 +200,7 @@ void say()
 {
     printf("Hello from icanc.h");
 }
-````
+```
 
 ```c
 // include/greeter.h

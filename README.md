@@ -128,8 +128,6 @@ And then you can download testcases directly from udebug:
 icanc create testcases beecrowd 1069 -u
 ```
 
-> Special thank you to Vinit Shah for the help with API access.
-
 ## Project structure
 ```
 leet/

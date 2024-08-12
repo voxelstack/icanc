@@ -24,6 +24,10 @@ def preprocess_source(path, cache, included):
         while line is not None:
             trimmed = line.lstrip()
 
+            # Yeah yeah.
+            # It's enough for this use case.
+            #
+            # https://xkcd.com/1171/
             if trimmed.startswith("#pragma"):
                 pragma = trimmed[len("#pragma"):].lstrip()
                 if pragma.startswith("once"):
@@ -55,7 +59,7 @@ def preprocess_source(path, cache, included):
                 continue
 
             current_line_empty = len(trimmed) == 0
-            # Since we are ommiting some lines when generating the submission,
+            # Since we are omitting some lines when generating the submission,
             # it's common to have double line breaks which look bad.
             # Skip them.
             if not (last_line_empty and current_line_empty):

@@ -25,8 +25,9 @@ def preprocess_source(path, cache, included):
             trimmed = line.lstrip()
 
             # Yeah yeah.
-            # It's enough for this use case.
+            # String matching is enough here but I do speak AST.
             #
+            # https://github.com/voxelstack/atlas/blob/main/src/atlas/comms_derive/src/shareable.rs
             # https://xkcd.com/1171/
             if trimmed.startswith("#pragma"):
                 pragma = trimmed[len("#pragma"):].lstrip()

@@ -128,59 +128,6 @@ And then you can download testcases directly from udebug:
 icanc create testcases beecrowd 1069 -u
 ```
 
-## Project structure
-```
-leet/
-├─ binaries/
-├─ include/
-│  └─ icanc.h
-├─ problems/
-│  └─ beecrowd/
-│     └─ 1000/
-│        ├─ solution.c
-│        └─ testcases.toml
-├─ submissions/
-├─ templates/
-│  ├─ solve_one.c
-│  └─ solve_many.c
-├─ icancrc.toml
-├─ LICENSE
-└─ README.md
-```
-
-### `leet/`
-The `init` command will create a project folder with a name of your choice. All your code lives inside this folder, and this is where you should run commands from.
-
-### `binaries/`
-When solutions get compiled for testing, the resulting binaries will be placed on the `binaries/` folder. They are organized in subfolders by judge and problem.
-
-`icanc` tests the compiled binaries automatically so you **should not** need to interact with this folder.
-
-You **should not** commit this folder (the generated `.gitignore` already takes care of that).
-
-### `include/`
-This is where your header library will live. When compiling solutions the `include/` folder will be on your include path. Subfolders are supported, so you can organize your sources as you like.
-
-To include files from your header library you **must** use a `#pragma icanc include` block.
-
-### `problems/`
-Your problem solutions live here, along with their testcases. They are organized in subfolders by judge and problem.
-
-`icanc` generates these files for you, so you **should not** create files manually here.
-
-### `submissions/`
-When solutions get bundled for submitting, the resulting sources will be placed on the `submissions/` folder. They are organized in subfolders by judge and problem.
-
-`icanc` can copy submissions to the clipboard automatically, so you **should not** need to interact with this folder.
-
-You **should not** commit this folder (the generated `.gitignore` already takes care of that).
-
-### `templates/`
-When you create a new solution to a problem, it copies the source code from a given template. Those templates live in the `templates/` folder. You are free to manage your own templates, but keep in mind that `main.c` is the default and **should not** be removed.
-
-### `icancrc.toml`
-This file allows you to configure `icanc` for the current project.
-
 ## The preprocessor
 When you generate a submission, all `icanc` imports will be resolved recursively and then copied over to your submission file, replacing the include directive. It works just like the [C preprocessor](https://gcc.gnu.org/onlinedocs/cpp/Include-Operation.html), meaning it's equivalent to copying the header file into each source file that needs it.
 
@@ -241,6 +188,59 @@ int main()
     return 0;
 }
 ```
+
+## Project structure
+```
+leet/
+├─ binaries/
+├─ include/
+│  └─ icanc.h
+├─ problems/
+│  └─ beecrowd/
+│     └─ 1000/
+│        ├─ solution.c
+│        └─ testcases.toml
+├─ submissions/
+├─ templates/
+│  ├─ solve_one.c
+│  └─ solve_many.c
+├─ icancrc.toml
+├─ LICENSE
+└─ README.md
+```
+
+### `leet/`
+The `init` command will create a project folder with a name of your choice. All your code lives inside this folder, and this is where you should run commands from.
+
+### `binaries/`
+When solutions get compiled for testing, the resulting binaries will be placed on the `binaries/` folder. They are organized in subfolders by judge and problem.
+
+`icanc` tests the compiled binaries automatically so you **should not** need to interact with this folder.
+
+You **should not** commit this folder (the generated `.gitignore` already takes care of that).
+
+### `include/`
+This is where your header library will live. When compiling solutions the `include/` folder will be on your include path. Subfolders are supported, so you can organize your sources as you like.
+
+To include files from your header library you **must** use a `#pragma icanc include` block.
+
+### `problems/`
+Your problem solutions live here, along with their testcases. They are organized in subfolders by judge and problem.
+
+`icanc` generates these files for you, so you **should not** create files manually here.
+
+### `submissions/`
+When solutions get bundled for submitting, the resulting sources will be placed on the `submissions/` folder. They are organized in subfolders by judge and problem.
+
+`icanc` can copy submissions to the clipboard automatically, so you **should not** need to interact with this folder.
+
+You **should not** commit this folder (the generated `.gitignore` already takes care of that).
+
+### `templates/`
+When you create a new solution to a problem, it copies the source code from a given template. Those templates live in the `templates/` folder. You are free to manage your own templates, but keep in mind that `main.c` is the default and **should not** be removed.
+
+### `icancrc.toml`
+This file allows you to configure `icanc` for the current project.
 
 ## Commands
 For information on how to use each command, run the command with `--help`.

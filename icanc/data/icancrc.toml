@@ -1,4 +1,4 @@
-editor = "code.cmd"
+{author}{email}{repository}editor = "code.cmd"
 compiler = "gcc"
 
 # To use the udebug integration you must have **API access** to udebug.

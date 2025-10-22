@@ -6,13 +6,16 @@ from .common.exception import FoundException
 from .common.paths import data_path
 
 @click.command()
-@click.option("--name", prompt=True, default="leet")
-@click.option("--git", prompt="Initialize git repository", default=True, )
+@click.option("--name", prompt=True, default="leetcode")
+@click.option("--author", prompt=True)
+@click.option("--email", prompt=True)
+@click.option("--repository", prompt=True)
+@click.option("--git", prompt="Initialize git repository", default=True)
 def init(**kwargs):
     """Initialize an icanc project."""
     handle_init(**kwargs)
 
-def handle_init(name, git):
+def handle_init(name, author, email, repository, git):
     dir = os.path.join(os.getcwd(), name)
     if os.path.exists(dir):
         raise FoundException("project", f"./{name}/")
@@ -27,6 +30,15 @@ def handle_init(name, git):
         readme = src.read().format(name=name)
         with open(os.path.join(dir, "README.md"), "w") as dst:
             dst.write(readme)
+
+    with open(data_path("icancrc.toml"), "r") as src:
+        rc = src.read().format(
+            author=f"author=\"{author}\"\n" if author else "",
+            email=f"email=\"{email}\"\n" if email else "",
+            repository=f"repository=\"{repository}\"\n" if repository else ""
+        )
+        with open(os.path.join(dir, "icancrc.toml"), "w") as dst:
+            dst.write(rc)
     
     if git:
         shutil.copy2(data_path(".gitignore"), dir)

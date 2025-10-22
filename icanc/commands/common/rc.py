@@ -2,6 +2,9 @@ import os
 import tomllib
 
 config = dict(
+    author = None,
+    email = None,
+    repository = None,
     editor = "code.cmd",
     compiler = "gcc",
     udebug = None

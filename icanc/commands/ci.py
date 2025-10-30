@@ -56,7 +56,7 @@ def handle_ci(judge):
                 submission_path = icanc_path("submissions", judge, problem, solution)
                 os.makedirs(submission_dir, exist_ok=True)
 
-                submission = preprocess(solution_path, preprocess_cache)
+                submission = preprocess(judge, problem, solution, solution_path, preprocess_cache, True)
                 with open(submission_path, "w") as f:
                     f.write(submission)
 

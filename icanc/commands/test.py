@@ -73,7 +73,7 @@ def handle_test(judge, problem, solution_src, testcases_src, watch):
         for testcase in testcases:
             click.echo(f"\n< ./problems/{judge}/{problem}/{testcase['name']}")
 
-            handle_submit(judge, problem, solution_src, False, False)
+            handle_submit(judge, problem, solution_src, False, False, False)
             
             result = build(solution_path, submission_path, binary_path)
             if result != 0:
